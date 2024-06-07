@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\ether\\Documents\\Development\\Git\\cruzer\\Cruzer\\Cruzer.csproj": {}
+    "C:\\Users\\ether\\Documents\\Development\\Git\\cruzer\\Cruzer\\Cruzer.csproj": {}
   },
   "projects": {
-    "c:\\Users\\ether\\Documents\\Development\\Git\\cruzer\\Cruzer\\Cruzer.csproj": {
+    "C:\\Users\\ether\\Documents\\Development\\Git\\cruzer\\Cruzer\\Cruzer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\ether\\Documents\\Development\\Git\\cruzer\\Cruzer\\Cruzer.csproj",
+        "projectUniqueName": "C:\\Users\\ether\\Documents\\Development\\Git\\cruzer\\Cruzer\\Cruzer.csproj",
         "projectName": "Cruzer",
-        "projectPath": "c:\\Users\\ether\\Documents\\Development\\Git\\cruzer\\Cruzer\\Cruzer.csproj",
+        "projectPath": "C:\\Users\\ether\\Documents\\Development\\Git\\cruzer\\Cruzer\\Cruzer.csproj",
         "packagesPath": "C:\\Users\\ether\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\ether\\Documents\\Development\\Git\\cruzer\\Cruzer\\obj\\",
+        "outputPath": "C:\\Users\\ether\\Documents\\Development\\Git\\cruzer\\Cruzer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ether\\AppData\\Roaming\\NuGet\\NuGet.Config",
