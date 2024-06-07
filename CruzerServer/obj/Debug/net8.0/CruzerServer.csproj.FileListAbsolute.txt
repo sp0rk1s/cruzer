@@ -12,3 +12,7 @@ C:\Users\ether\Documents\Development\Git\cruzer\CruzerServer\obj\Debug\net8.0\re
 C:\Users\ether\Documents\Development\Git\cruzer\CruzerServer\obj\Debug\net8.0\CruzerServer.pdb
 C:\Users\ether\Documents\Development\Git\cruzer\CruzerServer\obj\Debug\net8.0\CruzerServer.genruntimeconfig.cache
 C:\Users\ether\Documents\Development\Git\cruzer\CruzerServer\obj\Debug\net8.0\ref\CruzerServer.dll
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerServer\obj\Debug\net8.0\CruzerServer.sourcelink.json
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerServer\bin\Debug\net8.0\Pastel.dll
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerServer\obj\Debug\net8.0\CruzerServer.csproj.AssemblyReference.cache
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerServer\obj\Debug\net8.0\CruzerSe.01BA8750.Up2Date

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "THaiKNnJ8E4XEFzwQG3ehbhgjC23At1Tf5lOJ9tNd1RHUBwyjFTugdGaSPC9jLr5L+ixyCc3o2R6ezNNK/dSSQ==",
+  "dgSpecHash": "1mKWZHkveN+jc2quIZA8uJs6P5PB74hXPWFlzpTj3DE8F1DmZzEynu3hyN97gE2PeRJ/ac0KJ4aGkX3ktjQ0Uw==",
   "success": true,
   "projectFilePath": "C:\\Users\\ether\\Documents\\Development\\Git\\cruzer\\CruzerServer\\CruzerServer.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\ether\\.nuget\\packages\\pastel\\5.1.0\\pastel.5.1.0.nupkg.sha512"
+  ],
   "logs": []
 }

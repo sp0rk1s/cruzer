@@ -1,11 +1,48 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "Pastel/5.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Pastel.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Pastel.dll": {
+            "related": ".xml"
+          }
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Pastel/5.1.0": {
+      "sha512": "jQ0fTkHZvgQsmbr5qU0IdCP1PWuUfmEmekIsTwysWK/iIwmT9Mbm0x5GpjYSTEwHTNVEpjYhBhyKVdzESgRCpg==",
+      "type": "package",
+      "path": "pastel/5.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "icon.png",
+        "lib/net462/Pastel.dll",
+        "lib/net462/Pastel.xml",
+        "lib/net6.0/Pastel.dll",
+        "lib/net6.0/Pastel.xml",
+        "lib/net8.0/Pastel.dll",
+        "lib/net8.0/Pastel.xml",
+        "pastel.5.1.0.nupkg.sha512",
+        "pastel.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "Pastel >= 5.1.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\ether\\.nuget\\packages\\": {}
@@ -50,6 +87,12 @@
     "frameworks": {
       "net8.0": {
         "targetAlias": "net8.0",
+        "dependencies": {
+          "Pastel": {
+            "target": "Package",
+            "version": "[5.1.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

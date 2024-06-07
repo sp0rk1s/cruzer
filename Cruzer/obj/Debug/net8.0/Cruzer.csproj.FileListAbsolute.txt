@@ -12,3 +12,4 @@ c:\Users\ether\Documents\Development\Git\cruzer\Cruzer\obj\Debug\net8.0\refint\C
 c:\Users\ether\Documents\Development\Git\cruzer\Cruzer\obj\Debug\net8.0\Cruzer.pdb
 c:\Users\ether\Documents\Development\Git\cruzer\Cruzer\obj\Debug\net8.0\Cruzer.genruntimeconfig.cache
 c:\Users\ether\Documents\Development\Git\cruzer\Cruzer\obj\Debug\net8.0\ref\Cruzer.dll
+C:\Users\ether\Documents\Development\Git\cruzer\Cruzer\obj\Debug\net8.0\Cruzer.sourcelink.json
