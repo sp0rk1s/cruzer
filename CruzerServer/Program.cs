@@ -3,6 +3,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace CruzerServer {
  
@@ -10,6 +11,13 @@ namespace CruzerServer {
 	
 		static void Main(string[] args)
 		{
+			Print(args.ToString() ?? "Bruh");
+			if (args[0] == "bind");
+			Print(args[1]);
+			foreach (var arg in args)
+			{
+				Print($"Argument={arg}");
+			}
 			ExecuteServer();
 		}
 
