@@ -1,11 +1,13 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace Cruzer {
- 
 	class Networking {
+		public static int headerSize = 1024;
 		public static void Print(string message, IPAddress? address = null) {
 			DateTime now = DateTime.Now;
 			Console.Write(now.ToString("dd:MM:yy HH:mm:ss") + " [ ");
@@ -40,6 +42,38 @@ namespace Cruzer {
 				}
 			}
 			Console.WriteLine(" ] " + message);
+		}
+		public static IPAddress GetFirstIpAddress() {
+			var host = Dns.GetHostEntry(Dns.GetHostName());
+			foreach (IPAddress iPAddress in host.AddressList)
+			{
+				if (iPAddress.AddressFamily == AddressFamily.InterNetwork)
+				{
+					return iPAddress;
+				}
+			}
+			throw new Exception("Failed to get local IPAddress");
+		}
+		public static Exception? PingNetwork(IPAddress iPAddress, UInt16 port = 11111, IPEndPoint? localIPEndPoint = null) {
+			Socket socket = new(iPAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+			try {
+				localIPEndPoint ??= new(GetFirstIpAddress(), port);
+			} catch { return new Exception("Failed to get local IPAddress"); }
+			try {
+				socket.Connect(localIPEndPoint);
+			} catch { return new Exception("Failed to connect to server"); }
+			string message = ">>ping";
+			socket.Send(Encoding.ASCII.GetBytes(message));
+			byte[] recievedBytes = new byte[1024];
+			string data = "";
+			while (true) {
+				int recievedBytesLength = socket.Receive(recievedBytes);
+				data += Encoding.ASCII.GetString(recievedBytes, 0, recievedBytesLength);
+				if (data.Last() == '\0') {
+					break;
+				}
+			}
+			return null;
 		}
 		public static void ExecuteClient()
 		{

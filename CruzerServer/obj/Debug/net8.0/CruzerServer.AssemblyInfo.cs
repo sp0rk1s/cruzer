@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CruzerServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ccc1b014c47c565efac976996033fb8ba985fb00")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+22bae463573067c2e090f740877f457b4a7ab4f7")]
 [assembly: System.Reflection.AssemblyProductAttribute("CruzerServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CruzerServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

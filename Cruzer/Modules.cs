@@ -123,7 +123,7 @@ class Sequence {
             Console.Write($"] {endMessage}");
         }
         {
-            int length = process.Length;
+            int length = (endMessage ?? process).Length;
             if (length < longest) {
                 Console.WriteLine("".PadLeft(longest - length, ' '));
             } else {

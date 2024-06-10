@@ -12,30 +12,43 @@ namespace Client {
 		static void Main(string[] args)
 		{
 			string currentDirectory = Environment.CurrentDirectory;
-			IniFile settings = new(currentDirectory + "\\Settings.ini");
+			if (args.Contains("")) {}
 			if (args.Length == 0) {
-				Console.WriteLine("     ******     ");
-				Console.WriteLine("  ************  ");
-				Console.WriteLine(" *****    ***** ");
-				Console.WriteLine("****        ****");
-				Console.WriteLine("****    \\\\\\\\   ");
-				Console.WriteLine(" *****   \\\\\\\\   ");
-				Console.WriteLine("  ******  \\\\\\\\  ");
-				Console.WriteLine("     ***   \\\\\\\\ ");
-				Console.WriteLine();
-				Sequence loading = new("Bruh", "SIGMA!!!");
-				Console.ReadKey();
-				loading.End("Sadge!");
-				loading = new("Bruh", "SIGMA!!!");
-				Console.ReadKey();
-				loading.End("Sadge!");
-				loading = new("Bruh", "SIGMA!!!");
-				Console.ReadKey();
-				loading.End("Sadge!");
-				loading = new("Bruh", "SIGMA!!!");
-				Console.ReadKey();
-				loading.End("Sadge!");
 				Thread.Sleep(500);
+				// Importing settings
+				Sequence sequence = new("Importing settings...", "Settings.ini");
+				IniFile settings = new(currentDirectory + "\\Settings.ini");
+				try { IPAddress.Parse(settings.content["defaultAddress"]); } catch {
+					sequence.End("Settings.ini:defaultAddress is invalid", endType: "depend");
+					Console.Read();
+					Environment.Exit(1);
+				}
+				Thread.Sleep(100);
+				sequence.End("Settings imported.");
+				Console.ReadLine();
+
+				// Establish connection
+				sequence = new("Importing settings...", "Settings.ini");
+				Exception? exception = Networking.PingNetwork(IPAddress.Parse(settings.content["defaultAddress"]));
+				Thread.Sleep(100);
+				sequence.End("Settings imported.");
+				Console.Clear();
+				Console.WriteLine("⠄⠄⠄⠄⠄⠄⠄⠄⢀⣠⣤⣶⣶⣿⣿⣿⣿⣿⣿⣶⣶⣤⣄⡀⠄⠄⠄⠄⠄⠄⠄⠄");
+				Console.WriteLine("⠄⠄⠄⠄⠄⠄⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠄⠄⠄⠄⠄⠄");
+				Console.WriteLine("⠄⠄⠄⠄⣰⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣆⠄⠄⠄⠄");
+				Console.WriteLine("⠄⠄⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠄⠄");
+				Console.WriteLine("⠄⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠁⠄⠄⠄⠄⠈⠙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠄");
+				Console.WriteLine("⢠⣿⣿⣿⣿⣿⣿⣿⣿⡟⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠈⢻⣿⣿⣿⣿⣿⣿⣿⣿⡄");
+				Console.WriteLine("⣼⣿⣿⣿⣿⣿⣿⣿⠏⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠹⣿⣿⣿⣿⣿⣿⣿⣧");
+				Console.WriteLine("⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣿⣿⣿⣿⣿⣿⣿⣿");
+				Console.WriteLine("⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄⠄⠄⠄⠄⠄⠄⠹⣿⣿⣿⣿⣿⣿⣿⣆⠄⠄⠄⠄⠄⠄⠄");
+				Console.WriteLine("⢻⣿⣿⣿⣿⣿⣿⣿⣆⠄⠄⠄⠄⠄⠄⠄⠄⠹⣿⣿⣿⣿⣿⣿⣿⣆⠄⠄⠄⠄⠄⠄");
+				Console.WriteLine("⠘⣿⣿⣿⣿⣿⣿⣿⣿⣧⡀⠄⠄⠄⠄⠄⠄⠄⠹⣿⣿⣿⣿⣿⣿⣿⣆⠄⠄⠄⠄⠄");
+				Console.WriteLine("⠄⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⡀⠄⠄⠄⠄⠄⢻⣿⣿⣿⣿⣿⣿⣿⣆⠄⠄⠄⠄");
+				Console.WriteLine("⠄⠄⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄⠄⠄⠻⣿⣿⣿⣿⣿⣿⣿⣆⠄⠄⠄");
+				Console.WriteLine("⠄⠄⠄⠄⠹⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄⠄⠄⠄⠹⣿⣿⣿⣿⣿⣿⣿⣆⠄⠄");
+				Console.WriteLine("⠄⠄⠄⠄⠄⠄⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄⠄⠄⠄⠄⠹⣿⣿⣿⣿⣿⣿⣿⣆⠄");
+				Console.WriteLine("⠄⠄⠄⠄⠄⠄⠄⠄⠈⠙⠛⠿⠿⣿⣿⣿⠄⠄⠄⠄⠄⠄⠄⠹⣿⣿⣿⣿⣿⣿⣿⣆");
 				if (settings.content.TryGetValue("clientVersion", out string? value)) {
 					Console.WriteLine("Version . . . . . . . . . " + settings.content["clientVersion"]);
 				} else {

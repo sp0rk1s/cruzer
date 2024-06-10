@@ -4,21 +4,29 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using Cruzer;
 
-namespace CruzerServer {
- 
+namespace Server {
 	class Program {
-	
+
 		static void Main(string[] args)
 		{
 			Print(args.ToString() ?? "Bruh");
-			if (args[0] == "bind");
-			Print(args[1]);
-			foreach (var arg in args)
-			{
-				Print($"Argument={arg}");
+			if (args.Length == 0) {
+				ExecuteServer();
 			}
-			ExecuteServer();
+		}
+
+		public static IPAddress GetFirstIpAddress() {
+			var host = Dns.GetHostEntry(Dns.GetHostName());
+			foreach (IPAddress iPAddress in host.AddressList)
+			{
+				if (iPAddress.AddressFamily == AddressFamily.InterNetwork)
+				{
+					return iPAddress;
+				}
+			}
+			throw new Exception("Failed to get local IPAddress");
 		}
 
 		private static void Print(string message, IPAddress? address = null) {
@@ -56,48 +64,50 @@ namespace CruzerServer {
 			}
 			Console.WriteLine(" ] " + message);
 		}
+
+		public static void HandleClient(Socket socket) {
+            if (socket.RemoteEndPoint is not IPEndPoint remoteIPEndPoint) {
+				return;
+			}
+            Print("Connected", address: remoteIPEndPoint.Address);
+			while (true) {
+				byte[] bytes = new byte[1024];
+				string data = "";
+				while (data != "CLOSE<EOF>") {
+					data = "";
+					while (true) {
+						int bytesLength = socket.Receive(bytes);
+						data += Encoding.ASCII.GetString(bytes, 0, bytesLength);
+						if (data.Last() == '\0') {
+							break;
+						}
+					}
+					if (socket.RemoteEndPoint is IPEndPoint remoteEndPoint) {
+						Print($"Recieved \"{data}\"", address: remoteEndPoint.Address);
+						socket.Send(Encoding.ASCII.GetBytes("Test Server"));
+					}
+				}
+				Print("Disconnected");
+				socket.Shutdown(SocketShutdown.Both);
+				socket.Close();
+			}
+		}
 	
 		public static void ExecuteServer()
 		{
-			// Establish the local endpoint 
-			// for the socket. Dns.GetHostName
-			// returns the name of the host 
-			// running the application.
-			IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
-			IPAddress ipAddr = ipHost.AddressList[0];
-			IPEndPoint localEndPoint = new IPEndPoint(ipAddr, 11111);
-			// Creation TCP/IP Socket using 
-			// Socket Class Constructor
-			Socket listener = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+			IPAddress iPAddress = GetFirstIpAddress();
+			IPEndPoint localEndPoint = new IPEndPoint(iPAddress, 11111);
+			Socket listener = new Socket(iPAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 			try {
 				// Using Bind() method we associate a
 				// network address to the Server Socket
 				// All client that will connect to this 
 				// Server Socket must know this network
 				listener.Bind(localEndPoint);
-				listener.Listen(10);
-				while (true) {
-					Print("Awaiting connection ... ");
-					Socket clientSocket = listener.Accept();
-                    byte[] bytes = new byte[1024];
-                    string data = "";
-					while (data != "CLOSE<EOF>") {
-						data = "";
-						while (true) {
-							int numByte = clientSocket.Receive(bytes);
-							data += Encoding.ASCII.GetString(bytes, 0, numByte);
-							if (data.IndexOf("<EOF>") > -1) {
-								break;
-							}
-						}
-						if (clientSocket.RemoteEndPoint is IPEndPoint remoteEndPoint) {
-						Print($"Recieved \"{data}\"", address: remoteEndPoint.Address);
-						clientSocket.Send(Encoding.ASCII.GetBytes("Test Server"));
-					}
-					}
-					clientSocket.Shutdown(SocketShutdown.Both);
-					clientSocket.Close();
-				}
+				Print("Listening");
+				listener.Listen();
+				Print("Recieving request...");
+				Thread thread = new(() => HandleClient(listener.Accept()));
 			}
 			catch (Exception exception) {
 				Print(exception.ToString());
