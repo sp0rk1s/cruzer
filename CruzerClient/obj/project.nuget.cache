@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "K/qZmPg8FqorK12urUwz4Nd9e05I2qMfds4b+FjKcEL3iYTDpoVB8HtdQ9lIgIDR7uhqqCCw2MP4MnVQF9VlUA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ether\\Documents\\Development\\Git\\cruzer\\CruzerClient\\CruzerClient.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ether\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.4\\microsoft.net.illink.tasks.8.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}

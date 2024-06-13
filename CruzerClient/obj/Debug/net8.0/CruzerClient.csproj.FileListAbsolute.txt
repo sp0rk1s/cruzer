@@ -1,0 +1,15 @@
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\bin\Debug\net8.0\CruzerClient.exe
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\bin\Debug\net8.0\CruzerClient.deps.json
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\bin\Debug\net8.0\CruzerClient.runtimeconfig.json
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\bin\Debug\net8.0\CruzerClient.dll
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\bin\Debug\net8.0\CruzerClient.pdb
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\obj\Debug\net8.0\CruzerClient.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\obj\Debug\net8.0\CruzerClient.AssemblyInfoInputs.cache
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\obj\Debug\net8.0\CruzerClient.AssemblyInfo.cs
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\obj\Debug\net8.0\CruzerClient.csproj.CoreCompileInputs.cache
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\obj\Debug\net8.0\CruzerClient.sourcelink.json
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\obj\Debug\net8.0\CruzerClient.dll
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\obj\Debug\net8.0\refint\CruzerClient.dll
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\obj\Debug\net8.0\CruzerClient.pdb
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\obj\Debug\net8.0\CruzerClient.genruntimeconfig.cache
+C:\Users\ether\Documents\Development\Git\cruzer\CruzerClient\obj\Debug\net8.0\ref\CruzerClient.dll

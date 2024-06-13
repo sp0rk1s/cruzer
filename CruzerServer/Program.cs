@@ -2,6 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.Net;
+using System.Net.Security;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -66,6 +67,30 @@ namespace Server {
 			Console.WriteLine(" ] " + message);
 		}
 
+		public static Packet RecievePacket(Socket socket) {
+			Packet packet = new();
+			byte[] data = new byte[Settings.MaxPacketSize];
+			int totalLength = 0;
+
+			// Recieving Header
+			while (totalLength < 512) {
+				byte[] bytes = new byte[Settings.MaxPacketSize + 512];
+				int bytesLength = socket.Receive(bytes);
+				Buffer.BlockCopy(bytes, 0, data, totalLength, bytesLength);
+				totalLength += bytesLength;
+			}
+			PacketHeader header = new(data.Take(512).ToArray());
+
+			// Recieving content
+			while (totalLength <= header.Size + 512) {
+				byte[] bytes = new byte[Settings.MaxPacketSize + 512];
+				int bytesLength = socket.Receive(bytes);
+				Buffer.BlockCopy(bytes, 0, data, totalLength, bytesLength);
+				totalLength += bytesLength;
+			}
+			return new(header, data);
+		}
+
 		public static void HandleClient(Socket socket) {
             if (socket.RemoteEndPoint is not IPEndPoint remoteIPEndPoint) {
 				return;
@@ -74,31 +99,11 @@ namespace Server {
 			while (true) {
 				Packet packet = new();
 				while (packet.Header.Type == PacketType.Disconnect) {
-					byte[] data = new byte[Settings.MaxPacketSize];
-					int totalLength = 0;
 
-					// Recieving Header
-					while (totalLength < 512) {
-						byte[] bytes = new byte[Settings.MaxPacketSize + 512];
-						int bytesLength = socket.Receive(bytes);
-						Buffer.BlockCopy(bytes, 0, data, totalLength, bytesLength);
-						totalLength += bytesLength;
-					}
-					PacketHeader header = new(data.Take(512).ToArray());
-
-					// Recieving content
-					while (totalLength <= header.Size + 512) {
-						byte[] bytes = new byte[Settings.MaxPacketSize + 512];
-						int bytesLength = socket.Receive(bytes);
-						Buffer.BlockCopy(bytes, 0, data, totalLength, bytesLength);
-						totalLength += bytesLength;
-					}
-					packet = new(header, data);
-
-					if (socket.RemoteEndPoint is IPEndPoint remoteEndPoint) {
-						Print($"Recieved \"{data}\"", address: remoteEndPoint.Address);
-						socket.Send(Encoding.ASCII.GetBytes("Test Server"));
-					}
+					packet = RecievePacket(socket);
+					
+					Print($"Packet #{packet.Header.Number}: Account {packet.Header.AccountID} sent packet of size \"{packet.Header.Size}\" ", address: remoteIPEndPoint.Address);
+					socket.Send(Encoding.ASCII.GetBytes("Test Server"));
 				}
 				Print("Disconnected", address: remoteIPEndPoint.Address);
 				socket.Shutdown(SocketShutdown.Both);
