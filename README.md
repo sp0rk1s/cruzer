@@ -9,10 +9,26 @@ Version: Pre-Alpha
 - [Networking](Networking)
 
 ## Concept
-
 Cruzer will be a easy online shell environment you can access on any pc using a quick code.
 Each server will have its own environment filled with services for people to access.
 There will be a website eventually where you can easily connect to your favorite enviorments without any downloading.
+```ansi
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\guest> cruzer connect cruzer.nu -a=9a21
+
+cruzer.nu : 9a21 >>> environment
+
+random.cxt		random extension 1
+cxt.cxt			cruzer extensions manager
+random2.cxt		random extension 2
+nano.cxt		nano editor
+
+cruzer.nu : 9a21 >>> _
+```
 
 ## Networking
 
@@ -21,8 +37,8 @@ There will be a website eventually where you can easily connect to your favorite
 | --------- | ------------- | ----------------- |
 | 0-7		| UInt64		| Account ID		|
 | 8-11		| Int32			| Packet Size		|
-| 12-15		| UInt32		| Packet Size		|
-| 16-19		| UInt32		| Packet Size		|
+| 12-15		| UInt32		| Packet Number		|
+| 16-19		| UInt32		| Packet Type		|
 | 20		| Boolean		| Respond			|
 | 21		| Boolean		| Ignore account	|
 | 22-512	| Int16:Int64	| Attributes		|
