@@ -1,5 +1,6 @@
 ﻿// A C# Program for Server
 
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -71,23 +72,35 @@ namespace Server {
 			}
             Print("Connected", address: remoteIPEndPoint.Address);
 			while (true) {
-				byte[] bytes = new byte[1024];
-				string data = "";
-				while (data != "CLOSE<EOF>") {
-					data = "";
-					while (true) {
+				Packet packet = new();
+				while (packet.Header.Type == PacketType.Disconnect) {
+					byte[] data = new byte[Settings.MaxPacketSize];
+					int totalLength = 0;
+
+					// Recieving Header
+					while (totalLength < 512) {
+						byte[] bytes = new byte[Settings.MaxPacketSize + 512];
 						int bytesLength = socket.Receive(bytes);
-						data += Encoding.ASCII.GetString(bytes, 0, bytesLength);
-						if (data.Last() == '\0') {
-							break;
-						}
+						Buffer.BlockCopy(bytes, 0, data, totalLength, bytesLength);
+						totalLength += bytesLength;
 					}
+					PacketHeader header = new(data.Take(512).ToArray());
+
+					// Recieving content
+					while (totalLength <= header.Size + 512) {
+						byte[] bytes = new byte[Settings.MaxPacketSize + 512];
+						int bytesLength = socket.Receive(bytes);
+						Buffer.BlockCopy(bytes, 0, data, totalLength, bytesLength);
+						totalLength += bytesLength;
+					}
+					packet = new(header, data);
+
 					if (socket.RemoteEndPoint is IPEndPoint remoteEndPoint) {
 						Print($"Recieved \"{data}\"", address: remoteEndPoint.Address);
 						socket.Send(Encoding.ASCII.GetBytes("Test Server"));
 					}
 				}
-				Print("Disconnected");
+				Print("Disconnected", address: remoteIPEndPoint.Address);
 				socket.Shutdown(SocketShutdown.Both);
 				socket.Close();
 			}
@@ -108,6 +121,7 @@ namespace Server {
 				listener.Listen();
 				Print("Recieving request...");
 				Thread thread = new(() => HandleClient(listener.Accept()));
+				Print("Listening resumed");
 			}
 			catch (Exception exception) {
 				Print(exception.ToString());

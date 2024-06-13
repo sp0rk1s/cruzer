@@ -3,9 +3,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
+using Cruzer;
 using System.Text;
 
-namespace Cruzer {
+namespace Client {
 	class Networking {
 		public static int headerSize = 1024;
 		public static void Print(string message, IPAddress? address = null) {
